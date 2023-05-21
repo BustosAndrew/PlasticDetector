@@ -11,14 +11,11 @@ def process_img(request): #post /api/process
             data = {'res': 'Only POST requests allowed!'}
             res = HttpResponse(content=json.dumps(data), content_type='application/json')
             return res
-      file_name = request.FILES['image']
-      #file_content = file_name.read()
-      current_directory = os.getcwd()
-      darknet_directory = os.path.join(current_directory, "darknet")
-
-      if os.getcwd() != darknet_directory:
+      file = request.FILES['image']
+      if 'darknet' not in os.getcwd():
             os.chdir('./darknet')
-      command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights ' + file_name.path
+      filename = os.path.join('/Users/bustosman/Downloads', 'bottom.jpg')
+      command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights ' + filename
       subprocess.run([command])
       newPath = cv.saveImg('predictions.jpg')
       file = None
