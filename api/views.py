@@ -30,4 +30,5 @@ def process_img(request):  # post /api/process
         data), content_type='application/json')
     os.chdir('./data')
     os.remove(file.name)
+    os.chdir('../')
     return res
