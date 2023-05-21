@@ -14,7 +14,7 @@ def process_img(request): #post /api/process
       file_name = request.FILES['image']
       #file_content = file_name.read()
       current_directory = os.getcwd()
-      darknet_directory = os.path.join(current_directory, "/darknet")
+      darknet_directory = os.path.join(current_directory, "darknet")
 
       if os.getcwd() != darknet_directory:
             os.chdir('./darknet')
