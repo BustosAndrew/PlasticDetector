@@ -4,6 +4,8 @@ import subprocess
 from django.http import HttpResponse
 from . import cv
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 
 @csrf_exempt
@@ -16,7 +18,7 @@ def process_img(request):  # post /api/process
     file = request.FILES['image']
     if 'darknet' not in os.getcwd():
         os.chdir('./darknet')
-    file.save(file.name, file.name)
+    default_storage.save('data/' + file.name, ContentFile(file.read()))
     command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights ' + file.name
     subprocess.run([command])
     newPath = cv.saveImg('predictions.jpg')
