@@ -3,7 +3,9 @@ import os
 import subprocess
 from django.http import HttpResponse
 from . import cv
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def process_img(request): #post /api/process
       if request.method != 'POST':
             data = {'res': 'Only POST requests allowed!'}
