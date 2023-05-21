@@ -17,7 +17,7 @@ def process_img(request): #post /api/process
       darknet_directory = os.path.join(current_directory, "/darknet")
 
       if os.getcwd() != darknet_directory:
-            os.chdir(darknet_directory)
+            os.chdir('./darknet')
       command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights ' + file_name.path
       subprocess.run([command])
       newPath = cv.saveImg('predictions.jpg')
