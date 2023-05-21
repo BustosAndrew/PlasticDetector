@@ -19,7 +19,7 @@ def process_img(request):  # post /api/process
     if 'darknet' not in os.getcwd():
         os.chdir('./darknet')
     default_storage.save('data/' + file.name, ContentFile(file.read()))
-    command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights ' + file.name
+    command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights data/' + file.name
     subprocess.run([command])
     newPath = cv.saveImg('predictions.jpg')
     file = None
