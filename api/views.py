@@ -28,5 +28,6 @@ def process_img(request):  # post /api/process
     data = {'res', file}
     res = HttpResponse(content=json.dumps(
         data), content_type='application/json')
-    subprocess.run(['rm /data/' + file.name])
+    os.chdir('./data')
+    os.remove(file.name)
     return res
