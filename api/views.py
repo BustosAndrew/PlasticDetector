@@ -13,7 +13,7 @@ def process_img(request): #post /api/process
             return res
       file_name = request.FILES['image']
       #file_content = file_name.read()
-      os.chdir('./darknet')
+      os.chdir('../darknet')
       command = './darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights ' + file_name.path
       subprocess.run([command])
       newPath = cv.saveImg('predictions.jpg')
